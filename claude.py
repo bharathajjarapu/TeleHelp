@@ -1,7 +1,7 @@
 import logging
 from telegram import ForceReply, Update, Location
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
-import openai
+import anthropic
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -54,9 +54,7 @@ async def location(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         await update.message.reply_text("Sorry, I couldn't retrieve your location.")
 
-openai.api_type = "open_ai"
-openai.api_base = "http://localhost:1234/v1"
-openai.api_key = "Whatever"
+api_key = "Whatever"
 messages = [{'role': 'system', 'content': 'You are an Emergency Registering Chatbot in India. Responses should be short, and only one question at a time. Do not suggest calling 911, 112, or 108. If the problem is serious, ask for the user location. and send an ambulance or fire brigade or police respectively'}]
 
 async def bot_reply(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -66,7 +64,7 @@ async def bot_reply(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message.text != '':
         user_input = update.message.text
         messages.append({'role': 'user', 'content': user_input})
-        response = openai.ChatCompletion.create(model='gpt-4', messages=messages, temperature=0, max_tokens=-1)
+        response = client.messages.create(model="claude-3-opus-20240229",max_tokens=1024,messages=messages)
         messages.append({'role': 'assistant', 'content': response.choices[0].message.content})
         llm_reply = response.choices[0].message.content
         context.user_data['llm_reply'] = llm_reply
