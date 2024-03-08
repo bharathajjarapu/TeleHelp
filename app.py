@@ -76,7 +76,7 @@ async def bot_reply(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text(llm_reply)
 
 def main() -> None:
-    application = Application.builder().token("6805040405:AAHzhHGiKWs0DDOonXc60_lTrWMMhE9WP-Y").build()
+    application = Application.builder().token("").build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, bot_reply))
     application.add_handler(MessageHandler(filters.LOCATION, location))
