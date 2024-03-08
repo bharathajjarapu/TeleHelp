@@ -1,7 +1,4 @@
-# TeleHelp
-Telegram Bot to help Emergencies
-
-# 🚨 Emergency Helper ChatBot 🆘
+# TeleHelp Emergency ChatBot 🆘
 
 Welcome to the Emergency Helper ChatBot! This Python AI project is designed to assist users during emergencies by leveraging the power of GPT and local inference. With this chatbot, you can report accidents, fires, or crimes, and it will automatically dispatch the appropriate emergency services to your location. 💻🚑🚒🚓
 
