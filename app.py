@@ -54,8 +54,8 @@ async def location(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         await update.message.reply_text("Sorry, I couldn't retrieve your location.")
 
-openai.api_type = "open_ai"
-openai.api_base = "http://localhost:1234/v1"
+openai.api_type = "open_ai" 
+openai.api_base = "http://localhost:1234/v1" # Local interference server address
 openai.api_key = "Whatever"
 messages = [{'role': 'system', 'content': 'You are an Emergency Registering Chatbot in India. Responses should be short, and only one question at a time. Do not suggest calling 911, 112, or 108. If the problem is serious, ask for the user location. and send an ambulance or fire brigade or police respectively'}]
 
